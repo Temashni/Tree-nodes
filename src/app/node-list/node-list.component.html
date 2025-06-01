@@ -1,0 +1,9 @@
+@for (node of node; track node.id) {
+  <app-node [node]="node" [behavior]="'logAction'"/>
+}
+
+<hr/>
+
+@for (node of nodes; track node.id) {
+  <app-node [node]="node"/>
+}
