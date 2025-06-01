@@ -1,0 +1,35 @@
+<div class="node">
+  @if (behavior === 'logAction') {
+  <p>ID: {{ node.id }}</p>
+  }
+
+  <p>Name: {{ node.title }}</p>
+
+  @if (behavior === 'showChildren' && node.children.length > 0) {
+  <p>Quantity: {{ node.children.length }}</p>
+  }
+
+  <!-- Скрывал бы кнопку, если массив children пустой, т.к. пользователь больше никак не может взаимодействовать с этой кнопкой -->
+  <!-- @if (behavior === 'logAction' && node.children.length < 1) { 
+      <button class="btn" (click)="logAction()" [disabled]="node.is_deleted">Log</button>
+    }
+  
+    @if (behavior === 'showChildren' && node.children.length > 0) {
+      <button class="btn" (click)="node.toggleOpen()" [disabled]="node.is_deleted">Show All</button> 
+    } -->
+
+  <button class="btn" (click)="onButtonClick()" [disabled]="node.is_deleted">
+    <p>{{ btnText }}</p>
+    @if (node.children.length > 0) {
+    <div>{{ node.isOpen() ? "⬆️" : "⬇️" }}</div>
+    }
+  </button>
+</div>
+
+@if (node.isOpen()) {
+  @for (child of node.children; track child.id) {
+  <div class="pl-16">
+    <app-node [node]="child"/>
+  </div>
+  } 
+}

@@ -1,0 +1,1 @@
+export type NodeBehavior = 'showChildren' | 'logAction';
